@@ -23,3 +23,8 @@ Resources:
             Properties:
                 Path: /
                 Method: get
+Outputs:
+  ShowApi:
+    Description: API Gateway endpoint URL for Prod stage for Votes function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/                      

@@ -1,0 +1,13 @@
+aws s3 mb s3://samexample2
+
+sam package --template-file template.yaml --output-template-file package.yaml --s3-bucket samexample2
+
+sam deploy -t package.yaml --stack-name samexdynamo --capabilities CAPABILITY_IAM
+
+curl https://6zf4mdeedj.execute-api.us-east-1.amazonaws.com/Prod
+
+curl -H "Content-Type: application/json" -X POST -d '{"vote":"spaces"}' https://6zf4mdeedj.execute-api.us-east-1.amazonaws.com/Prod
+
+aws cloudformation describe-stacks --stack-name samexdynamo --query "Stacks[0].Outputs[1].OutputValue"
+
+aws cloudformation delete-stack --stack-name samexdynamo
